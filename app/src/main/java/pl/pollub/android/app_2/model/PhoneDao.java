@@ -25,4 +25,7 @@ interface PhoneDao {
 
     @Query("select * from phones where id=:phoneId")
     Phone getPhone(long phoneId);
+
+    @Query("delete from phones")
+    void deleteAll();
 }

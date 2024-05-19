@@ -35,4 +35,8 @@ public class PhoneRepository {
     public Phone getPhone(long phoneId) {
         return this.phoneDao.getPhone(phoneId);
     }
+
+    public void deleteAll() {
+        PhonesDatabase.databaseWriteExecutor.execute(this.phoneDao::deleteAll);
+    }
 }

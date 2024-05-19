@@ -3,8 +3,15 @@ package pl.pollub.android.app_2;
 
 import static androidx.recyclerview.widget.ItemTouchHelper.LEFT;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -15,8 +22,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -29,11 +34,9 @@ public class PhonesListActivity extends AppCompatActivity {
     public static String PHONE_ANDROID_VERSION_KEY = "PHONE_ANDROID_VERSION_KEY";
     public static String PHONE_WEB_SITE_KEY = "PHONE_WEB_SITE_KEY";
 
-    private RecyclerView phoneListRv;
     private PhoneInfoListAdapter adapter;
     private PhoneViewModel phoneViewModel;
     private ActivityResultLauncher<Intent> launcher;
-    private FloatingActionButton addPhoneFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +46,17 @@ public class PhonesListActivity extends AppCompatActivity {
         this.launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::upsertPhone);
         this.adapter = new PhoneInfoListAdapter(this);
         this.adapter.setListener(this::editAddPhone);
-        this.phoneListRv = this.findViewById(R.id.phones_list_rv);
-        this.phoneListRv.setAdapter(this.adapter);
-        this.phoneListRv.setLayoutManager(new LinearLayoutManager(this));
         this.phoneViewModel = new ViewModelProvider(this).get(PhoneViewModel.class);
         this.phoneViewModel.getAllPhones().observe(this, phones -> this.adapter.setPhoneList(phones));
-        this.addPhoneFab = this.findViewById(R.id.add_phone_fab);
-        this.addPhoneFab.setOnClickListener(view -> this.addNewPhone());
+
+        RecyclerView phoneListRv = this.findViewById(R.id.phones_list_rv);
+        phoneListRv.setAdapter(this.adapter);
+        phoneListRv.setLayoutManager(new LinearLayoutManager(this));
+
+        this.findViewById(R.id.add_phone_fab).setOnClickListener(view -> this.addNewPhone());
 
         ItemTouchHelper itemTouchHelper = getItemTouchHelper();
-        itemTouchHelper.attachToRecyclerView(this.phoneListRv);
+        itemTouchHelper.attachToRecyclerView(phoneListRv);
     }
 
     @NonNull
@@ -66,13 +70,49 @@ public class PhonesListActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 List<Phone> allPhones = PhonesListActivity.this.phoneViewModel.getAllPhones().getValue();
-                if(allPhones == null) return;
+                if (allPhones == null) return;
 
                 Phone phoneToDelete = allPhones.get(viewHolder.getAdapterPosition());
                 PhonesListActivity.this.phoneViewModel.delete(phoneToDelete);
             }
         };
         return new ItemTouchHelper(callback);
+    }
+
+    private void showConfirmationPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.confirmation_menu, null);
+        builder.setView(view);
+
+        Button confirmButton = view.findViewById(R.id.delete_all_confirm_btn);
+        Button cancelButton = view.findViewById(R.id.btn_cancel);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        confirmButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            PhonesListActivity.this.phoneViewModel.deleteAll();
+            Toast.makeText(PhonesListActivity.this, R.string.all_phones_deleted, Toast.LENGTH_SHORT).show();
+        });
+        cancelButton.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.delete_all_phones) {
+            this.showConfirmationPopup();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void addNewPhone() {
@@ -116,7 +156,8 @@ public class PhonesListActivity extends AppCompatActivity {
         String webSite = bundle.getString(PHONE_WEB_SITE_KEY);
 
         // I do not need to show any message to the user, because validation was performed in the PhoneActivity
-        if(manufacturer == null || model == null || androidVersion == null || webSite == null) return;
+        if (manufacturer == null || model == null || androidVersion == null || webSite == null)
+            return;
 
         if (id == 0) {
             this.phoneViewModel.insert(new Phone(manufacturer, model, androidVersion, webSite));

@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,7 +22,6 @@ import pl.pollub.android.app_2.util.UrlUtil;
 
 public class PhoneActivity extends AppCompatActivity {
     private PhoneViewModel phoneViewModel;
-    private Intent editIntent;
     private EditText manufacturerEt;
     private EditText modelEt;
     private EditText androidVersionEt;

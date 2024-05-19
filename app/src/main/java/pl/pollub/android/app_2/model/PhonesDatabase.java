@@ -22,9 +22,9 @@ abstract class PhonesDatabase extends RoomDatabase {
             super.onCreate(db);
             databaseWriteExecutor.execute(() -> {
                 PhoneDao dao = INSTANCE.getPhoneDao();
-                dao.insert(new Phone("google", "Pixel 6a", "Android 14", "google.com"));
-                dao.insert(new Phone("google", "Pixel 7a", "Android 14", "google.com"));
-                dao.insert(new Phone("google", "Pixel 8a", "Android 15", "google.com"));
+                dao.insert(new Phone("google", "Pixel 6a", "Android 14", "https://google.com"));
+                dao.insert(new Phone("google", "Pixel 7a", "Android 14", "https://google.com"));
+                dao.insert(new Phone("google", "Pixel 8a", "Android 15", "https://google.com"));
             });
         }
     };

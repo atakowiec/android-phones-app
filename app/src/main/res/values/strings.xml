@@ -17,5 +17,9 @@
     <string name="error_invalid_web_site">Invalid web site. Should look like: http://www.example.com</string>
     <string name="open_web_site_error_empty">Cannot open. Web site is empty.</string>
     <string name="open_web_site_error_invalid">Cannot open. Web site is invalid.</string>
-    <string name="delete_all_phones_menu_option">Delete all phones</string>
+    <string name="delete_all_phones_menu_option">Clear all data</string>
+    <string name="delete_all_confirm_btn">Delete all</string>
+    <string name="delete_all_cancel_btn">Cancel</string>
+    <string name="delete_all_dialog_text">Are you sure you want to clear all data?</string>
+    <string name="all_phones_deleted">All phones deleted</string>
 </resources>

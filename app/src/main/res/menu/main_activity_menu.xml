@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/delete_all_phones"
+        android:icon="@drawable/ic_add"
+        android:title="@string/delete_all_phones_menu_option"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>
