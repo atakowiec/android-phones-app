@@ -10,4 +10,9 @@
     <string name="add_phone_button_description">Add phone</string>
     <string name="phone_row_manufacturer_placeholder">manufacturer</string>
     <string name="phone_row_model_placeholder">model info</string>
+    <string name="error_empty_manufacturer">Manufacturer is required</string>
+    <string name="error_empty_model">Model is required</string>
+    <string name="error_empty_android_version">Android version is required</string>
+    <string name="error_empty_web_site">Web site is required</string>
+    <string name="error_invalid_web_site">Invalid web site. Should look like: http://www.example.com</string>
 </resources>

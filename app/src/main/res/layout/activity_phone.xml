@@ -21,6 +21,22 @@
             tools:ignore="LabelFor" />
     </TableRow>
 
+    <TableRow>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/manufacturer_error_tv"
+            android:layout_span="4"
+            android:paddingHorizontal="5dp"
+            android:textColor="#f00"
+            android:visibility="gone"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
     <TableRow android:id="@+id/model_row">
 
         <TextView
@@ -33,6 +49,22 @@
             android:layout_span="4"
             android:autofillHints="phoneModel"
             android:inputType="text"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
+    <TableRow>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/model_error_tv"
+            android:layout_span="4"
+            android:paddingHorizontal="5dp"
+            android:textColor="#f00"
+            android:visibility="gone"
             tools:ignore="LabelFor" />
     </TableRow>
 
@@ -51,6 +83,22 @@
             tools:ignore="LabelFor" />
     </TableRow>
 
+    <TableRow>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/android_version_error_tv"
+            android:layout_span="4"
+            android:paddingHorizontal="5dp"
+            android:textColor="#f00"
+            android:visibility="gone"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
     <TableRow android:id="@+id/web_site_row">
 
         <TextView
@@ -66,7 +114,24 @@
             tools:ignore="LabelFor" />
     </TableRow>
 
-    <TableRow android:id="@+id/buttons_row"
+    <TableRow>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/web_site_error_tv"
+            android:layout_span="4"
+            android:paddingHorizontal="5dp"
+            android:textColor="#f00"
+            android:visibility="gone"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/buttons_row"
         android:layout_marginTop="5dp">
 
         <Button
