@@ -12,12 +12,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.net.URL;
+import pl.pollub.android.app_2.util.UrlUtil;
 
 public class PhoneActivity extends AppCompatActivity {
     private PhoneViewModel phoneViewModel;
@@ -27,6 +29,7 @@ public class PhoneActivity extends AppCompatActivity {
     private EditText androidVersionEt;
     private EditText webSiteEt;
     private long phoneId;
+    private String phoneWebSite;
     private TextView manufacturerErrorTv;
     private TextView modelErrorTv;
     private TextView androidVersionErrorTv;
@@ -57,11 +60,17 @@ public class PhoneActivity extends AppCompatActivity {
         });
         this.findViewById(R.id.web_site_bt).setOnClickListener(view -> {
             // app will take current value from the web site field and try to open it in the browser
-            String webSite = this.webSiteEt.getText().toString();
-            if (webSite.isEmpty()) return;
+            if (phoneWebSite == null || phoneWebSite.isEmpty()) {
+                Toast.makeText(this, R.string.open_web_site_error_empty, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (UrlUtil.isInvalid(phoneWebSite)) {
+                Toast.makeText(this, R.string.open_web_site_error_invalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(webSite));
+            intent.setData(Uri.parse(phoneWebSite));
             startActivity(intent);
         });
     }
@@ -80,7 +89,7 @@ public class PhoneActivity extends AppCompatActivity {
         String phoneManufacturer = bundle.getString(PHONE_MANUFACTURER_KEY);
         String phoneModel = bundle.getString(PHONE_MODEL_KEY);
         String phoneAndroidVersion = bundle.getString(PHONE_ANDROID_VERSION_KEY);
-        String phoneWebSite = bundle.getString(PHONE_WEB_SITE_KEY);
+        this.phoneWebSite = bundle.getString(PHONE_WEB_SITE_KEY);
         this.manufacturerEt.setText(String.valueOf(phoneManufacturer));
         this.modelEt.setText(phoneModel);
         this.androidVersionEt.setText(phoneAndroidVersion);
@@ -131,15 +140,9 @@ public class PhoneActivity extends AppCompatActivity {
         if (webSite == null || webSite.isEmpty()) {
             setError(this.webSiteErrorTv, getString(R.string.error_empty_web_site));
             isValid = false;
-        } else {
-            // Check if the web site is a valid URL
-            try {
-                // this will throw an exception if the URL is not valid
-                new URL(webSite).toURI();
-            } catch (Exception e) {
-                setError(this.webSiteErrorTv, getString(R.string.error_invalid_web_site));
-                isValid = false;
-            }
+        } else if (UrlUtil.isInvalid(webSite)) {
+            setError(this.webSiteErrorTv, getString(R.string.error_invalid_web_site));
+            isValid = false;
         }
 
         return isValid;

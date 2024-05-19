@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">app_2</string>
+    <string name="app_name">Phones app</string>
     <string name="manufacturer_label">Manufacturer</string>
     <string name="model_label">Model</string>
     <string name="android_version_label">Android version</string>
@@ -15,4 +15,7 @@
     <string name="error_empty_android_version">Android version is required</string>
     <string name="error_empty_web_site">Web site is required</string>
     <string name="error_invalid_web_site">Invalid web site. Should look like: http://www.example.com</string>
+    <string name="open_web_site_error_empty">Cannot open. Web site is empty.</string>
+    <string name="open_web_site_error_invalid">Cannot open. Web site is invalid.</string>
+    <string name="delete_all_phones_menu_option">Delete all phones</string>
 </resources>
