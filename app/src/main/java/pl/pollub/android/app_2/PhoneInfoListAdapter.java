@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.pollub.android.app_2.model.Phone;
+import pl.pollub.android.app_2.util.OnItemClickListener;
 
 public class PhoneInfoListAdapter extends RecyclerView.Adapter<PhoneInfoViewHolder> {
-    private Activity contextActivity;
+    private final Activity contextActivity;
     private List<Phone> phoneList;
     private OnItemClickListener listener;
 

@@ -6,6 +6,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import pl.pollub.android.app_2.util.OnItemClickListener;
+
 public class PhoneInfoViewHolder extends RecyclerView.ViewHolder {
     private final TextView manufacturerInfoTv;
     private final TextView modelInfoTv;

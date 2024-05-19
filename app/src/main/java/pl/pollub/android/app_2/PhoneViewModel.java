@@ -21,10 +21,6 @@ public class PhoneViewModel extends AndroidViewModel {
         this.allPhones = this.repository.getLiveData();
     }
 
-    public PhoneRepository getRepository() {
-        return repository;
-    }
-
     public void insert(Phone phone) {
         this.repository.insert(phone);
     }

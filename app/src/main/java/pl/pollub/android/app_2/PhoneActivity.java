@@ -16,12 +16,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import pl.pollub.android.app_2.util.UrlUtil;
 
 public class PhoneActivity extends AppCompatActivity {
-    private PhoneViewModel phoneViewModel;
     private EditText manufacturerEt;
     private EditText modelEt;
     private EditText androidVersionEt;
@@ -37,7 +35,6 @@ public class PhoneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
-        this.phoneViewModel = new ViewModelProvider(this).get(PhoneViewModel.class);
 
         this.manufacturerEt = this.findViewById(R.id.manufacturer_et);
         this.modelEt = this.findViewById(R.id.model_et);
