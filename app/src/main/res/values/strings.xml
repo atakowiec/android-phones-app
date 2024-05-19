@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">app_2</string>
+    <string name="manufacturer_label">Manufacturer</string>
+    <string name="model_label">Model</string>
+    <string name="android_version_label">Android version</string>
+    <string name="web_site_label">Web site</string>
+    <string name="web_site_bt_label">Web site</string>
+    <string name="cancel_bt_label">Cancel</string>
+    <string name="save_bt_label">Save</string>
+    <string name="add_phone_button_description">Add phone</string>
+    <string name="phone_row_manufacturer_placeholder">manufacturer</string>
+    <string name="phone_row_model_placeholder">model info</string>
+</resources>

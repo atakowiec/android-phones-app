@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"
+    android:stretchColumns="4">
+
+    <TableRow android:id="@+id/manufacturer_row">
+
+        <TextView
+            android:id="@+id/manufacturer_label_tv"
+            android:paddingHorizontal="5dp"
+            android:text="@string/manufacturer_label" />
+
+        <EditText
+            android:id="@+id/manufacturer_et"
+            android:layout_span="4"
+            android:autofillHints="manufacturer"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
+    <TableRow android:id="@+id/model_row">
+
+        <TextView
+            android:id="@+id/model_label_tv"
+            android:paddingHorizontal="5dp"
+            android:text="@string/model_label" />
+
+        <EditText
+            android:id="@+id/model_et"
+            android:layout_span="4"
+            android:autofillHints="phoneModel"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
+    <TableRow android:id="@+id/android_version_row">
+
+        <TextView
+            android:id="@+id/android_version_label_tv"
+            android:paddingHorizontal="5dp"
+            android:text="@string/android_version_label" />
+
+        <EditText
+            android:id="@+id/android_version_et"
+            android:layout_span="4"
+            android:autofillHints="androidVersion"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
+    <TableRow android:id="@+id/web_site_row">
+
+        <TextView
+            android:id="@+id/web_site_label_tv"
+            android:paddingHorizontal="5dp"
+            android:text="@string/web_site_label" />
+
+        <EditText
+            android:id="@+id/web_site_et"
+            android:layout_span="4"
+            android:autofillHints="website"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+    </TableRow>
+
+    <TableRow android:id="@+id/buttons_row"
+        android:layout_marginTop="5dp">
+
+        <Button
+            android:id="@+id/save_bt"
+            android:layout_marginHorizontal="2dp"
+            android:layout_span="2"
+            android:layout_weight="1"
+            android:text="@string/save_bt_label" />
+
+        <Button
+            android:id="@+id/cancel_bt"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_marginHorizontal="2dp"
+            android:layout_span="1"
+            android:text="@string/cancel_bt_label" />
+
+        <Button
+            android:id="@+id/web_site_bt"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_marginHorizontal="2dp"
+            android:layout_span="1"
+            android:text="@string/web_site_bt_label" />
+    </TableRow>
+</TableLayout>
