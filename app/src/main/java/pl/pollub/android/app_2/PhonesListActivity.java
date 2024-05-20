@@ -6,6 +6,7 @@ import static androidx.recyclerview.widget.ItemTouchHelper.LEFT;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,11 +70,16 @@ public class PhonesListActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                List<Phone> allPhones = PhonesListActivity.this.phoneViewModel.getAllPhones().getValue();
-                if (allPhones == null) return;
+                try {
+                    List<Phone> allPhones = PhonesListActivity.this.phoneViewModel.getAllPhones().getValue();
+                    if (allPhones == null) return; // this should never happen but just in case
 
-                Phone phoneToDelete = allPhones.get(viewHolder.getAdapterPosition());
-                PhonesListActivity.this.phoneViewModel.delete(phoneToDelete);
+                    Phone phoneToDelete = allPhones.get(viewHolder.getAdapterPosition());
+                    PhonesListActivity.this.phoneViewModel.delete(phoneToDelete);
+                } catch (Exception e) {
+                    Log.e("PhonesListActivity", "Error while deleting phone", e);
+                    Toast.makeText(PhonesListActivity.this, R.string.phone_delete_error, Toast.LENGTH_SHORT).show();
+                }
             }
         };
         return new ItemTouchHelper(callback);
@@ -129,7 +135,6 @@ public class PhonesListActivity extends AppCompatActivity {
 
         bundle.putLong(PHONE_ID_KEY, currentPhone.getId());
         bundle.putString(PHONE_MANUFACTURER_KEY, currentPhone.getManufacturer());
-        bundle.putString(PHONE_MODEL_KEY, currentPhone.getModel());
         bundle.putString(PHONE_MODEL_KEY, currentPhone.getModel());
         bundle.putString(PHONE_ANDROID_VERSION_KEY, currentPhone.getAndroidVersion());
         bundle.putString(PHONE_WEB_SITE_KEY, currentPhone.getWebSite());

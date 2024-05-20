@@ -9,6 +9,7 @@ import static pl.pollub.android.app_2.PhonesListActivity.PHONE_WEB_SITE_KEY;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -71,24 +72,28 @@ public class PhoneActivity extends AppCompatActivity {
     }
 
     private void loadPhone() {
-        Intent intent = this.getIntent();
-        if (intent == null) return;
+        try {
+            Intent intent = this.getIntent();
+            if (intent == null) return;
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) return;
+            Bundle bundle = getIntent().getExtras();
+            if (bundle == null) return;
 
-        long id = bundle.getLong(PHONE_ID_KEY);
-        this.phoneId = id;
-        if (id <= 0) return;
+            long id = bundle.getLong(PHONE_ID_KEY);
+            this.phoneId = id;
+            if (id <= 0) return;
 
-        String phoneManufacturer = bundle.getString(PHONE_MANUFACTURER_KEY);
-        String phoneModel = bundle.getString(PHONE_MODEL_KEY);
-        String phoneAndroidVersion = bundle.getString(PHONE_ANDROID_VERSION_KEY);
-        this.phoneWebSite = bundle.getString(PHONE_WEB_SITE_KEY);
-        this.manufacturerEt.setText(String.valueOf(phoneManufacturer));
-        this.modelEt.setText(phoneModel);
-        this.androidVersionEt.setText(phoneAndroidVersion);
-        this.webSiteEt.setText(phoneWebSite);
+            String phoneManufacturer = bundle.getString(PHONE_MANUFACTURER_KEY);
+            String phoneModel = bundle.getString(PHONE_MODEL_KEY);
+            String phoneAndroidVersion = bundle.getString(PHONE_ANDROID_VERSION_KEY);
+            this.phoneWebSite = bundle.getString(PHONE_WEB_SITE_KEY);
+            this.manufacturerEt.setText(String.valueOf(phoneManufacturer));
+            this.modelEt.setText(phoneModel);
+            this.androidVersionEt.setText(phoneAndroidVersion);
+            this.webSiteEt.setText(phoneWebSite);
+        } catch (Exception e) {
+            Log.e("PhoneActivity", "Error loading phone", e);
+        }
     }
 
     private void savePhone() {

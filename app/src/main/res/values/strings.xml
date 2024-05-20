@@ -22,4 +22,5 @@
     <string name="delete_all_cancel_btn">Cancel</string>
     <string name="delete_all_dialog_text">Are you sure you want to clear all data?</string>
     <string name="all_phones_deleted">All phones deleted</string>
+    <string name="phone_delete_error">Error while deleting phone</string>
 </resources>
